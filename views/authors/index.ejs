@@ -1,0 +1,10 @@
+<h3>serach bar</h3>
+<form action="/authors"  method="get">
+    <label>name</label>
+    <input type="text" name="name">
+    <button  type="submit">search</button>
+</form>
+<br>
+<% authors.forEach(author =>{%>
+    <div><%= author.name %> </div>
+<%}) %> 
