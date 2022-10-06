@@ -1,4 +1,8 @@
 <%# this view is going to be imported in layout.ejs   %> 
 <%# thanks to body tag and the cal to index.ejs we call layout.ejs %> 
-
-middle
+<h3>recently added books</h3>
+<div>
+    <% books.forEach(book => {%>
+        <div> <img src="<%= book.coverImagePath %> " height="150" width="100"> <%= book.title %> </div>
+    <%}) %> 
+    </div>

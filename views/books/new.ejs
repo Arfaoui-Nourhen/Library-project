@@ -1,0 +1,8 @@
+<%#  >express use body-parser library to access the data when we send or create data
+ because it has no easy way to access them 41.225.56.186/32%>
+<h3>New Book</h3>
+<form action="/books" method="POST" enctype="multipart/form-data">
+    <%- include('_form_fields.ejs') %> 
+<a href="/books">cancel</a>
+<button type="submit">create</button>
+</form>
