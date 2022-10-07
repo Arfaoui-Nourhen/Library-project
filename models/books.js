@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 //a schema in mongoDb or no sequel databases is like a table 
-const path=require('path')
-const coverImageBasePath='uploads/bookCovers'
 
 //create Table Book
 const bookSchema = new mongoose.Schema({
@@ -30,20 +28,23 @@ const bookSchema = new mongoose.Schema({
       required:true,
       ref:'Author'
     },
-    coverImageName: {
-      type: String,
+    coverImage: {
+      type: Buffer,
       required: true
     },
+    
+      coverImageType:{
+        type:String,
+        required :true
+      }
+     
   })
 
-  bookSchema.virtual('coverImagePath').get(function(){
-    //the raison why we used function() instead of arrow function is because
-    // we need to access to this property which going to be linked to the actual book itself
-    if (this.coverImageName != null) {
-      return path.join('/', coverImageBasePath, this.coverImageName)
-    }
-  })
+  bookSchema.virtual('coverImagePath').get(function() {
+  if (this.coverImage != null && this.coverImageType != null) {
+    return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
+  }
+})
 
 //the table name is book 
 module.exports=mongoose.model('Book',bookSchema);
-module.exports.coverImageBasePath=coverImageBasePath;
